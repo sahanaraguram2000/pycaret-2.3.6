@@ -1953,6 +1953,7 @@ def predict_model(
     drift_report: bool = False,
     round: int = 4,
     verbose: bool = True,
+    report_name: str = None
 ) -> pd.DataFrame:
 
     """
@@ -2032,6 +2033,7 @@ def predict_model(
         round=round,
         verbose=verbose,
         ml_usecase=MLUsecase.CLASSIFICATION,
+        report_name=report_name
     )
 
 

@@ -8619,6 +8619,7 @@ def predict_model(
     verbose: bool = True,
     ml_usecase: Optional[MLUsecase] = None,
     display: Optional[Display] = None,  # added in pycaret==2.2.0
+    report_name: str = None 
 ) -> pd.DataFrame:
 
     """
@@ -8788,6 +8789,7 @@ def predict_model(
                 data_before_preprocess,
                 X_train,
                 X_test_,
+                report_name
             )
 
         elif ml_usecase == MLUsecase.REGRESSION:
@@ -8797,6 +8799,7 @@ def predict_model(
                 data_before_preprocess,
                 X_train,
                 X_test_,
+                report_name
             )
 
     # function to replace encoded labels with their original values
@@ -10278,7 +10281,7 @@ def _create_regression_dashboard(
     explainer = RegressionExplainer(
         model, get_config("X_test"), get_config("y_test"), **kwargs
     )
-    ExplainerDashboard(explainer, mode=mode, **dashboard_kwargs).run(**run_kwargs)
+    ExplainerDashboard(explainer, mode=mode, **dashboard_kwargs).save_html(**run_kwargs)
 
 
 def _create_classification_dashboard(
@@ -10293,7 +10296,7 @@ def _create_classification_dashboard(
     explainer = ClassifierExplainer(
         model, get_config("X_test"), get_config("y_test"), labels=labels_, **kwargs
     )
-    ExplainerDashboard(explainer, mode=mode, **dashboard_kwargs).run(**run_kwargs)
+    ExplainerDashboard(explainer, mode=mode, **dashboard_kwargs).save_html(**run_kwargs)
 
 
 def convert_model(estimator, language: str = "python") -> str:

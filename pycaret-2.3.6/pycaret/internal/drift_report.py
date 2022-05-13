@@ -8,6 +8,7 @@ def create_classification_drift_report(
     unprocessed_data: pd.DataFrame,
     X_train: pd.DataFrame,
     X_test: pd.DataFrame,
+    report_name: str
 ) -> str:
 
     try:
@@ -39,7 +40,7 @@ def create_classification_drift_report(
 
     dashboard = Dashboard(tabs=[DataDriftTab(), CatTargetDriftTab()])
     dashboard.calculate(reference_data, current_data, column_mapping=column_mapping)
-    report_name = f"{estimator_name}_Drift_Report_Classification.html"
+    # report_name = f"{estimator_name}_Drift_Report_Classification.html"
     dashboard.save(report_name)
     print(f"{report_name} saved successfully.")
     return report_name
@@ -51,6 +52,7 @@ def create_regression_drift_report(
     unprocessed_data: pd.DataFrame,
     X_train: pd.DataFrame,
     X_test: pd.DataFrame,
+    report_name: str
 ) -> str:
 
     try:
@@ -82,7 +84,7 @@ def create_regression_drift_report(
 
     dashboard = Dashboard(tabs=[DataDriftTab(), NumTargetDriftTab()])
     dashboard.calculate(reference_data, current_data, column_mapping=column_mapping)
-    report_name = f"{estimator_name}_Drift_Report_Regression.html"
+    # report_name = f"{estimator_name}_Drift_Report_Regression.html"
     dashboard.save(report_name)
     print(f"{report_name} saved successfully.")
     return report_name
